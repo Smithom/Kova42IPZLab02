@@ -16,23 +16,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void  onClick(View view)
-    {
-      /* Intent intent = new Intent(this, NextActivity.class);
-        startActivity(intent);*/
-
-
+    public void onClick(View view) {
         Intent intent = new Intent(this, NextActivity.class);
-
         String text = editText.getText().toString();
-
         intent.putExtra("value", text);
-
         Intent chooser = Intent.createChooser(intent, text);
+
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(chooser);
         }
+    }
 
-
+    public void onClickSendTo(View view) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, editText.getText().toString());
+        intent.setType("text/plain");
+        startActivity(intent);
     }
 }
